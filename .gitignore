@@ -1,5 +1,6 @@
 .DS_Store
 .bundle
+.rvmrc
 db/*.sql
 db/*.sqlite3*
 db/schema.rb
