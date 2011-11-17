@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Order do
-  describe "capturable scope", :focus do
+  describe "capturable scope" do
     before do
       user = User.anonymous!
       defaults = {

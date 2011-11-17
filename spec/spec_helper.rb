@@ -3,13 +3,20 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../test_app/config/environment", __FILE__)
 require 'rspec/rails'
+require 'awesome_print'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
+# Spree core factories
 require 'spree_core/testing_support/factories'
 
+# Require local factories
+Dir["#{File.dirname(__FILE__)}/factories/**"].each do |f|
+  fp =  File.expand_path(f)
+  require fp
+end
 
 RSpec.configure do |config|
   config.mock_with :rspec
