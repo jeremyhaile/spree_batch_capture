@@ -46,5 +46,18 @@ describe Batch do
 
   end
 
+  describe "when getting the class" do
+    subject { @bogus_batch.worker_klass }
+    it { should eql BatchProcess::Worker::Bogus }
+
+    it "should raise a InvalidBatch error if the batch is invalid" do
+      @bogus_batch.worker_class = "invalid"
+      
+      expect { @bogus_batch.worker_klass }.
+        to raise_error(BatchProcess::Error::InvalidBatch)
+
+    end
+    
+  end
 
 end

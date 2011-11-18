@@ -58,7 +58,11 @@ class Batch < ActiveRecord::Base
   end
 
   def worker_klass
-    BatchProcess::Worker.const_get(self.worker_class)
+    begin 
+      return ::BatchProcess::Worker.const_get(self.worker_class)
+    rescue
+      raise BatchProcess::Error::InvalidBatch.new "Unable to determine worker class."
+    end
   end
 
 

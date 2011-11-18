@@ -17,4 +17,5 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency('spree_core', '>= 0.60.4')
+  s.add_dependency('resque', '~> 1.19.0')
 end
