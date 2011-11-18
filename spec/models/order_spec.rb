@@ -7,7 +7,7 @@ describe Order do
       defaults = {
         :state => 'complete',
         :completed_at => 5.days.ago,
-        :payment_state => 'pending',
+        :payment_state => 'balance_due',
         :user => user
       }
 

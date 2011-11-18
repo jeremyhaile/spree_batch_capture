@@ -2,8 +2,10 @@
 
 Factory.define :batch do |b|
   b.worker_class "Bogus"
-  b.options Hash.new(:test => true) 
   b.run_in_background false
+  b.after_create do |batch|
+    batch.options = { :test => true }
+  end
 end
 
 Factory.define :running_batch, :parent => :batch do |b|

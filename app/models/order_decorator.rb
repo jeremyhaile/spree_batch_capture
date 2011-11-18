@@ -7,10 +7,10 @@ Order.class_eval do
 
     case options[:failed]
     when :only then statuses = ['failed']
-    when :exclude then statuses = ['pending']
-    when :include then statuses = ['pending', 'failed']
+    when :exclude then statuses = ['balance_due']
+    when :include then statuses = ['balance_due', 'failed']
     else 
-      statuses = ['pending']
+      statuses = ['balance_due']
     end
 
     o = Order.where("state = 'complete' AND payment_state IN (?)", statuses)
