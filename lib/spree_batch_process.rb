@@ -1,7 +1,7 @@
 require 'spree_core'
-require 'batch_process_hooks'
+require 'spree_batch_process_hooks'
 
-module BatchProcess
+module SpreeBatchProcess
   class Engine < Rails::Engine
 
     config.autoload_paths += %W(#{config.root}/lib)

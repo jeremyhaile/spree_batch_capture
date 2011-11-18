@@ -50,7 +50,7 @@ class Batch < ActiveRecord::Base
 
   def run_batch!
     if self.run_in_background
-      BatchProcess::BackgroundRunner.perform(self)
+      SpreeBatchProcess::BackgroundRunner.perform(self)
     else
       worker_klass.perform(self)
     end
@@ -59,9 +59,9 @@ class Batch < ActiveRecord::Base
 
   def worker_klass
     begin 
-      return ::BatchProcess::Worker.const_get(self.worker_class)
+      return SpreeBatchProcess::Worker.const_get(self.worker_class)
     rescue
-      raise BatchProcess::Error::InvalidBatch.new "Unable to determine worker class."
+      raise SpreeBatchProcess::Error::InvalidBatch.new "Unable to determine worker class."
     end
   end
 

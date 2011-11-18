@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'batch_process'
+  s.name        = 'spree_batch_process'
   s.version     = '0.0.1'
   s.summary     = 'Adds batch processing to Spree'
   s.description = 'Adds batch processing to Spree. Includes batch capture and batch export of orders.'
