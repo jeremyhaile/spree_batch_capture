@@ -22,6 +22,7 @@ module SpreeBatchProcess
                 payment_source.capture(payment)
               rescue => e
                 batch_errors << "Error capturing payment for order #{order.number}. #{e.class} :: #{e.message}"
+                payment.fail
               end
 
             else
@@ -38,6 +39,34 @@ module SpreeBatchProcess
       batch.save!
 
       return batch_errors.empty?
+    end
+
+    # see the worker base for description of this method
+    def self.options_description(batch)
+      opts = {}
+      return opts unless batch.options && batch.options[:capturable]
+
+      if batch.options[:capturable][:failed]
+        opts[:include_failed_items] = batch.options[:capturable][:failed]
+      else
+        opts[:include_failed_items] = :include
+      end
+
+      if batch.options[:capturable][:start_time] 
+        opts[:orders_completed_after] = batch.options[:capturable][:start_time]
+      end
+
+      if batch.options[:capturable][:end_time] 
+        opts[:orders_completed_before] = batch.options[:capturable][:end_time]
+      end
+      
+      return opts
+    end
+
+    # see the worker base for description of this method
+    def self.errors_description(batch)
+      errors = batch.options.nil? ? [] : batch.options[:batch_errors]
+      { :errors_during_capture => errors || [] }
     end
     
   end

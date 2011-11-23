@@ -65,5 +65,12 @@ class Batch < ActiveRecord::Base
     end
   end
 
+  def options_description
+    worker_klass.options_description(self)
+  end
+
+  def errors_description
+    worker_klass.errors_description(self)
+  end
 
 end
